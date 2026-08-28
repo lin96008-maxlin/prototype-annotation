@@ -1,0 +1,14 @@
+{
+  "prototypeId": "web-annotation-template-bad",
+  "version": 1,
+  "globalMeta": { "name": "错误示例", "version": "V0.1", "updatedAt": "2026-07-23" },
+  "globalSections": [],
+  "annotations": [
+    { "id": "one-a", "scope": "page:one", "target": ".page-panel-body", "x": 0.2, "y": 0.2, "title": "页面说明", "content": "统一模板内容。" },
+    { "id": "one-b", "scope": "page:one", "target": ".page-panel-body", "x": 0.5, "y": 0.5, "title": "页面说明", "content": "统一模板内容。" },
+    { "id": "two-a", "scope": "page:two", "target": ".page-panel-body", "x": 0.2, "y": 0.2, "title": "页面说明", "content": "统一模板内容。" },
+    { "id": "two-b", "scope": "page:two", "target": ".page-panel-body", "x": 0.5, "y": 0.5, "title": "页面说明", "content": "统一模板内容。" },
+    { "id": "three-a", "scope": "page:three", "target": ".page-panel-body", "x": 0.2, "y": 0.2, "title": "页面说明", "content": "统一模板内容。" },
+    { "id": "three-b", "scope": "page:three", "target": ".page-panel-body", "x": 0.5, "y": 0.5, "title": "页面说明", "content": "统一模板内容。" }
+  ]
+}

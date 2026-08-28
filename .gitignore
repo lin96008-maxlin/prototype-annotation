@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.prototype-review/
+.playwright-cli/
+test-results/
+playwright-report/
+*.log
+

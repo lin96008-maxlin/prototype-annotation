@@ -1,0 +1,47 @@
+{
+  "prototypeId": "mobile-low-value-annotations",
+  "version": 1,
+  "mobile": {
+    "appRoot": "[data-proto-app]",
+    "deviceWidth": 414,
+    "scrollContainers": ["[data-proto-scroll-container]"]
+  },
+  "globalMeta": {
+    "name": "低价值标注反例",
+    "version": "V0.1",
+    "updatedAt": "2026-07-27"
+  },
+  "globalSections": [],
+  "annotations": [
+    {
+      "id": "obvious-navbar",
+      "scope": "page:order:*",
+      "target": "#navbar",
+      "x": 0.5,
+      "y": 0.5,
+      "title": "顶部导航栏",
+      "format": "markdown",
+      "content": "显示当前页面标题，点击返回按钮返回上一页。"
+    },
+    {
+      "id": "generic-drilldown",
+      "scope": "page:order:base",
+      "target": "#baseTop",
+      "x": 0.8,
+      "y": 0.4,
+      "title": "页面支持下钻",
+      "format": "markdown",
+      "content": "点击内容可以进入详情查看详细信息。"
+    },
+    {
+      "id": "generic-capability",
+      "scope": "page:order:base",
+      "target": "#baseMiddle",
+      "x": 0.5,
+      "y": 0.5,
+      "title": "支持筛选和导出",
+      "format": "markdown",
+      "content": "页面支持筛选、刷新和导出。"
+    }
+  ]
+}

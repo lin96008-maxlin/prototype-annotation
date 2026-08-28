@@ -1,0 +1,153 @@
+{
+  "prototypeId": "ecommerce-order-admin-skill-e2e",
+  "version": 1,
+  "globalMeta": {
+    "name": "电商订单运营后台原型",
+    "version": "V1.0 验收版",
+    "updatedAt": "2026-07-31"
+  },
+  "globalSections": [
+    {
+      "id": "overview",
+      "title": "业务背景与范围",
+      "format": "markdown",
+      "content": "## 产品定位\n\n面向店铺运营和售后人员，集中管理订单查询、履约处理、退款售后与经营概览。\n\n## 本次覆盖\n\n- 按订单编号、商品、收货人和状态检索订单。\n- 查看订单详情与履约节点。\n- 对待发货订单执行批量发货。\n- 跟踪配送异常和售后处理结果。"
+    },
+    {
+      "id": "architecture",
+      "title": "功能架构",
+      "format": "markdown",
+      "content": "```mermaid\nflowchart LR\n  A[经营概览] --> B[订单列表]\n  B --> C[订单详情]\n  B --> D[批量发货]\n  C --> E[物流跟踪]\n  C --> F[售后处理]\n```\n\n| 功能域 | 主要职责 |\n| --- | --- |\n| 经营概览 | 查看核心交易与履约指标 |\n| 订单管理 | 检索订单、查看详情和处理发货 |\n| 售后管理 | 处理退款、退货和异常反馈 |"
+    },
+    {
+      "id": "rules",
+      "title": "关键业务规则",
+      "format": "markdown",
+      "content": "1. 查询条件按交集生效，分页、导出与当前条件保持一致。\n2. 只有待发货订单可以进入发货流程，已取消或售后中的订单不可提交。\n3. 批量操作必须逐项返回成功或失败结果，不能因部分失败覆盖成功记录。\n4. 金额、状态、物流节点与售后结论在列表、详情和导出中保持一致。"
+    },
+    {
+      "id": "roles",
+      "title": "角色与权限",
+      "format": "markdown",
+      "content": "| 角色 | 核心职责 | 主要数据范围 |\n| --- | --- | --- |\n| 店铺运营 | 查询订单、处理发货、查看经营指标 | 已授权店铺订单 |\n| 售后专员 | 受理退款退货、记录协商结果 | 已分配售后单 |\n| 经营负责人 | 查看汇总指标和异常趋势 | 已授权业务范围 |"
+    },
+    {
+      "id": "acceptance",
+      "title": "验收重点",
+      "format": "markdown",
+      "content": "- 搜索、筛选、分页和导出使用同一订单范围。\n- 订单详情展示的金额、状态和物流信息与列表一致。\n- 批量发货只处理满足条件的已选订单，并给出逐项结果。\n- 页面、抽屉和弹窗只显示当前最高层作用域标注。\n- 1366×768 与 1440×900 下业务页面和标注入口均可用。"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "order-search-scope",
+      "scope": "page:orders",
+      "target": "#page-orders .toolbar-search",
+      "x": 0.02,
+      "y": 0.5,
+      "category": "查询规则",
+      "title": "关键词与筛选条件按交集查询",
+      "format": "markdown",
+      "content": "关键词匹配订单编号、商品名称和收货人，并与订单状态、下单时间和店铺条件按交集生效。清空关键词不重置其他筛选项。"
+    },
+    {
+      "id": "order-metrics-consistency",
+      "scope": "page:orders",
+      "target": "#page-orders .metric-grid",
+      "x": 0.02,
+      "y": 0.18,
+      "category": "指标口径",
+      "title": "经营指标与订单范围保持一致",
+      "format": "markdown",
+      "content": "今日支付、待发货、配送异常和退款率均基于当前授权范围统计。指标卡进入明细后应自动携带对应状态与时间条件。"
+    },
+    {
+      "id": "order-table-contract",
+      "scope": "page:orders",
+      "target": "#page-orders .table-wrap",
+      "x": 0.03,
+      "y": 0.2,
+      "category": "字段规则",
+      "title": "列表字段与订单详情使用同一数据来源",
+      "format": "markdown",
+      "content": "订单编号、商品、实付金额、履约状态和下单时间在列表、详情与导出中保持一致。状态更新后刷新当前行，不改变用户的筛选与分页位置。"
+    },
+    {
+      "id": "order-batch-selection",
+      "scope": "page:orders",
+      "target": "#page-orders .batch-toolbar",
+      "x": 0.03,
+      "y": 0.5,
+      "category": "批量操作",
+      "title": "批量发货只接收可处理订单",
+      "format": "markdown",
+      "content": "仅允许选择当前账号可操作且状态为待发货的订单。切换店铺或筛选条件后，清理不再可见或不再满足条件的选择项。"
+    },
+    {
+      "id": "order-detail-state",
+      "scope": "drawer:orderDetail",
+      "target": "#orderDetailDrawer",
+      "x": 0.04,
+      "y": 0.18,
+      "category": "详情规则",
+      "title": "订单详情按履约节点组织信息",
+      "format": "markdown",
+      "content": "详情展示商品、收货、支付、优惠、物流与售后信息。当前状态决定可见操作；已取消订单不显示发货入口，售后中的订单保留协商记录。"
+    },
+    {
+      "id": "shipment-form-validation",
+      "scope": "drawer:shipment",
+      "target": "#shipmentForm",
+      "x": 0.04,
+      "y": 0.2,
+      "category": "表单校验",
+      "title": "发货提交前校验承运商与运单号",
+      "format": "markdown",
+      "content": "承运商与运单号为必填项，运单号按承运商规则校验。校验失败时保留已填写内容并定位到对应字段，不更新订单状态。"
+    },
+    {
+      "id": "shipment-submit-result",
+      "scope": "dialog:shipmentConfirm",
+      "target": "#shipmentConfirmDialog",
+      "x": 0.05,
+      "y": 0.5,
+      "category": "提交结果",
+      "title": "发货成功后再更新履约状态",
+      "format": "markdown",
+      "content": "确认后锁定提交按钮以防重复。接口成功才将订单更新为已发货并写入物流节点；失败时显示原因并允许修正后重试。"
+    },
+    {
+      "id": "after-sale-eligibility",
+      "scope": "page:afterSales",
+      "target": "#page-after-sales .status-tabs",
+      "x": 0.03,
+      "y": 0.5,
+      "category": "售后规则",
+      "title": "售后状态决定可执行操作",
+      "format": "markdown",
+      "content": "待审核、待退货、待退款和已完成使用互斥状态。每次状态变化均保留处理人、时间、结论和用户提交的有效凭证。"
+    },
+    {
+      "id": "after-sale-refund",
+      "scope": "dialog:refund",
+      "target": "#refundDialog",
+      "x": 0.04,
+      "y": 0.2,
+      "category": "金额规则",
+      "title": "退款金额不得超过可退余额",
+      "format": "markdown",
+      "content": "可退余额扣除已退款金额和不可退费用。提交前再次校验订单支付状态；金额变化时要求用户重新确认，避免使用过期数据。"
+    },
+    {
+      "id": "export-current-scope",
+      "scope": "page:orders",
+      "target": "#exportOrdersButton",
+      "x": 0.05,
+      "y": 0.5,
+      "category": "导出规则",
+      "title": "导出继承当前查询范围与权限",
+      "format": "markdown",
+      "content": "导出使用当前店铺、关键词、状态和时间条件，只包含当前角色有权查看的字段。任务完成后提供可追踪的下载记录。"
+    }
+  ]
+}

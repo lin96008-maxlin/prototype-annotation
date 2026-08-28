@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>外部资源反例</title>
+  <link rel="stylesheet" href="https://example.com/app.css">
+  <style>
+    .bad-background { background-image: url("./images/background.png"); }
+  </style>
+</head>
+<body>
+  <img id="badImage" src="../external/example.png" alt="反例">
+  <script src="https://example.com/app.js"></script>
+</body>
+</html>

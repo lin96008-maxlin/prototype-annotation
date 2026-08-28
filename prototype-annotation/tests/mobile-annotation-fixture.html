@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端标注回归夹具</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; }
+    button { font: inherit; }
+    .mobile-app { width: 414px; height: 820px; display: flex; flex-direction: column; overflow: hidden; background: #fff; color: #223355; }
+    .navbar { height: 52px; flex: none; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #dde1eb; }
+    .order-header { padding: 14px 16px; flex: none; border-bottom: 1px solid #dde1eb; }
+    .tabs { height: 44px; flex: none; display: flex; border-bottom: 1px solid #dde1eb; }
+    .tabs button { flex: 1; border: 0; background: #fff; color: #6b7a99; }
+    .tabs button[aria-selected="true"] { color: #3388ff; border-bottom: 2px solid #3388ff; }
+    .tab-panel { min-height: 0; flex: 1; }
+    .main-scroller { height: 100%; overflow-y: auto; padding: 16px; }
+    .block { min-height: 260px; padding: 16px; border-bottom: 1px solid #dde1eb; }
+    .footer { height: 64px; flex: none; display: flex; align-items: center; justify-content: center; border-top: 1px solid #dde1eb; background: #fff; }
+  </style>
+</head>
+<body>
+  <main class="mobile-app" data-proto-app data-proto-platform="mobile" data-proto-scope="page:order" data-proto-layer="0">
+    <header id="navbar" class="navbar" data-proto-scroll="none">订单详情</header>
+    <section id="orderHeader" class="order-header">订单编号：20260723001</section>
+    <nav class="tabs">
+      <button type="button" data-tab="base" aria-selected="true">基础信息</button>
+      <button type="button" data-tab="process" aria-selected="false">办理流程</button>
+    </nav>
+    <section id="basePanel" class="tab-panel" data-proto-scope="page:order:base" data-proto-layer="0">
+      <div class="main-scroller" data-proto-scroll-container>
+        <div id="baseTop" class="block">基础信息顶部</div>
+        <div id="baseMiddle" class="block">基础信息中部</div>
+        <div id="baseBottom" class="block">基础信息底部</div>
+      </div>
+    </section>
+    <section id="processPanel" class="tab-panel" data-proto-scope="page:order:process" data-proto-layer="0" hidden>
+      <div class="main-scroller" data-proto-scroll-container>
+        <div id="processTop" class="block">办理流程顶部</div>
+        <div id="processBottom" class="block">办理流程底部</div>
+      </div>
+    </section>
+    <footer id="fixedFooter" class="footer" data-proto-scroll="none">固定底部订单操作</footer>
+  </main>
+  <script id="prototypeAnnotationData" type="application/json">
+  {
+    "prototypeId": "mobile-annotation-fixture",
+    "version": 1,
+    "mobile": {
+      "appRoot": "[data-proto-app]",
+      "deviceWidth": 414,
+      "scrollContainers": ["[data-proto-scroll-container]"]
+    },
+    "globalMeta": { "name": "回归夹具", "version": "V0.1", "updatedAt": "2026-07-23" },
+    "globalSections": [],
+    "annotations": [
+      { "id": "shared-header", "scope": "page:order:*", "target": "#orderHeader", "x": 0.95, "y": 0.5, "title": "订单摘要为页签公共信息", "format": "markdown", "content": "切换页签后保持不变。" },
+      { "id": "shared-footer", "scope": "page:order:*", "target": "#fixedFooter", "x": 0.9, "y": 0.5, "scroll": false, "title": "固定底部操作不参与正文滚动", "format": "markdown", "content": "定位时只高亮，不滚动手机画板。" },
+      { "id": "base-top", "scope": "page:order:base", "target": "#baseTop", "x": 0.95, "y": 0.2, "title": "基础信息顶部", "format": "markdown", "content": "仅在基础信息页签显示。" },
+      { "id": "base-bottom", "scope": "page:order:base", "target": "#baseBottom", "x": 0.95, "y": 0.8, "title": "基础信息底部", "format": "markdown", "content": "定位只滚动正文容器。" },
+      { "id": "process-top", "scope": "page:order:process", "target": "#processTop", "x": 0.95, "y": 0.2, "title": "办理流程顶部", "format": "markdown", "content": "仅在办理流程页签显示。" },
+      { "id": "process-bottom", "scope": "page:order:process", "target": "#processBottom", "x": 0.95, "y": 0.8, "title": "办理流程底部", "format": "markdown", "content": "办理流程页签中的滚动目标。" }
+    ]
+  }
+  </script>
+  <script>
+    document.querySelectorAll("[data-tab]").forEach(button => button.addEventListener("click", () => {
+      const isBase = button.dataset.tab === "base";
+      document.getElementById("basePanel").hidden = !isBase;
+      document.getElementById("processPanel").hidden = isBase;
+      document.querySelectorAll("[data-tab]").forEach(item => item.setAttribute("aria-selected", String(item === button)));
+      document.dispatchEvent(new Event("prototype-annotation:scopechange"));
+    }));
+  </script>
+</body>
+</html>

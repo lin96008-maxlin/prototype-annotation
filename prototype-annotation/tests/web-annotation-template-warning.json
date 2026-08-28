@@ -1,0 +1,21 @@
+{
+  "prototypeId": "web-warning",
+  "version": 1,
+  "review": { "designWidth": 1920, "designHeight": 1080 },
+  "globalMeta": {
+    "name": "Web warning 反例",
+    "version": "V0.1",
+    "updatedAt": "2026-07-27"
+  },
+  "globalSections": [],
+  "annotations": [
+    { "id": "warning-1", "scope": "page:one", "target": ".page-panel-body", "x": 0.1, "y": 0.1, "title": "说明一", "content": "内容一。" },
+    { "id": "warning-2", "scope": "page:two", "target": ".page-panel-body", "x": 0.2, "y": 0.2, "title": "说明二", "content": "内容二。" },
+    { "id": "warning-3", "scope": "page:three", "target": ".page-panel-body", "x": 0.3, "y": 0.3, "title": "说明三", "content": "内容三。" },
+    { "id": "warning-4", "scope": "page:one", "target": "#oneFilter", "x": 0.4, "y": 0.4, "title": "说明四", "content": "内容四。" },
+    { "id": "warning-5", "scope": "page:one", "target": "#oneTable", "x": 0.5, "y": 0.5, "title": "说明五", "content": "内容五。" },
+    { "id": "warning-6", "scope": "page:two", "target": "#twoMetrics", "x": 0.6, "y": 0.6, "title": "说明六", "content": "内容六。" },
+    { "id": "warning-7", "scope": "page:two", "target": "#twoSwitch", "x": 0.7, "y": 0.7, "title": "说明七", "content": "内容七。" },
+    { "id": "warning-8", "scope": "page:three", "target": "#threeTree", "x": 0.8, "y": 0.8, "title": "说明八", "content": "内容八。" }
+  ]
+}

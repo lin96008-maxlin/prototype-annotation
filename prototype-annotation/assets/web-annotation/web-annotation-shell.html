@@ -1,0 +1,109 @@
+<div class="protoWeb-root" id="prototypeAnnotationRoot" popover="manual" aria-label="原型标注层">
+  <div class="protoWeb-review-workspace" id="protoWebReviewWorkspace" aria-label="三栏审阅模式" hidden>
+    <aside class="protoWeb-review-side protoWeb-review-left" aria-label="原型说明">
+      <header class="protoWeb-review-side-header">
+        <span class="protoWeb-review-side-title">原型说明</span>
+        <button class="protoWeb-review-icon-button" id="protoWebReviewCollapseLeft" type="button" title="收起原型说明" aria-label="收起原型说明">‹</button>
+      </header>
+      <div class="protoWeb-review-docs-main">
+        <nav class="protoWeb-review-docs-nav" id="protoWebReviewDocsNav" aria-label="原型说明目录"></nav>
+        <article class="protoWeb-review-docs-body protoWeb-content" id="protoWebReviewDocsBody"></article>
+      </div>
+      <div class="protoWeb-review-rail">
+        <button class="protoWeb-review-icon-button" id="protoWebReviewExpandLeft" type="button" title="展开原型说明" aria-label="展开原型说明">›</button>
+      </div>
+    </aside>
+    <div class="protoWeb-review-splitter protoWeb-review-splitter-left" id="protoWebReviewSplitterLeft" role="separator" aria-label="调整原型说明宽度" aria-orientation="vertical" title="拖拽调整原型说明宽度"></div>
+    <section class="protoWeb-review-center">
+      <header class="protoWeb-review-toolbar">
+        <span class="protoWeb-review-scope" id="protoWebReviewScope">当前页面</span>
+        <div class="protoWeb-review-mode-group" aria-label="标注浏览模式">
+          <button id="protoWebReviewModeFloat" type="button">浮动标注</button>
+          <button class="is-active" id="protoWebReviewModeColumns" type="button" aria-current="true">三栏审阅</button>
+        </div>
+      </header>
+      <div class="protoWeb-review-canvas" id="protoWebReviewCanvas">
+        <div class="protoWeb-review-prototype-frame" id="protoWebReviewPrototypeFrame"></div>
+      </div>
+    </section>
+    <div class="protoWeb-review-splitter protoWeb-review-splitter-right" id="protoWebReviewSplitterRight" role="separator" aria-label="调整当前标注宽度" aria-orientation="vertical" title="拖拽调整当前标注宽度"></div>
+    <aside class="protoWeb-review-side protoWeb-review-right" aria-label="当前标注">
+      <header class="protoWeb-review-side-header">
+        <button class="protoWeb-review-icon-button" id="protoWebReviewCollapseRight" type="button" title="收起当前标注" aria-label="收起当前标注">›</button>
+        <span class="protoWeb-review-side-title">当前标注</span>
+      </header>
+      <div class="protoWeb-review-note-tools">
+        <span id="protoWebReviewNoteCount">0 条</span>
+        <label class="protoWeb-review-toggle-wrap">显示圆点
+          <button class="protoWeb-review-toggle" id="protoWebReviewNoteToggle" type="button" role="switch" aria-checked="false" aria-label="显示页面标注"></button>
+        </label>
+      </div>
+      <div class="protoWeb-review-note-list" id="protoWebReviewNoteList"></div>
+      <div class="protoWeb-review-rail">
+        <button class="protoWeb-review-icon-button" id="protoWebReviewExpandRight" type="button" title="展开当前标注" aria-label="展开当前标注">‹</button>
+      </div>
+    </aside>
+  </div>
+  <div class="protoWeb-marker-layer" id="protoWebMarkerLayer"></div>
+  <section class="protoWeb-panel" id="protoWebPanel" role="dialog" aria-label="原型标注详情">
+    <header class="protoWeb-panel-header" id="protoWebPanelHeader">
+      <span class="protoWeb-panel-heading" id="protoWebPanelHeading">标注详情</span>
+      <span class="protoWeb-panel-tools">
+        <button class="protoWeb-icon-button" id="protoWebCollapse" type="button" title="收起标注窗口" aria-label="收起标注窗口">−</button>
+        <button class="protoWeb-icon-button" id="protoWebClose" type="button" title="关闭标注详情" aria-label="关闭标注详情">×</button>
+      </span>
+    </header>
+    <div class="protoWeb-panel-body">
+      <article class="protoWeb-content" id="protoWebContent"></article>
+    </div>
+    <footer class="protoWeb-panel-footer">
+      <button class="protoWeb-nav-button" id="protoWebPrev" type="button">上一条</button>
+      <span class="protoWeb-page-count" id="protoWebPageCount">1 / 1</span>
+      <button class="protoWeb-nav-button" id="protoWebNext" type="button">下一条</button>
+    </footer>
+    <span class="protoWeb-resize-handle" data-direction="n" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="ne" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="e" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="se" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="s" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="sw" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="w" aria-hidden="true"></span>
+    <span class="protoWeb-resize-handle" data-direction="nw" aria-hidden="true"></span>
+  </section>
+  <div class="protoWeb-menu" id="protoWebMenu" role="menu" aria-label="原型标注菜单">
+    <div class="protoWeb-menu-mode">
+      <span class="protoWeb-menu-mode-label">浏览模式</span>
+      <div class="protoWeb-menu-mode-group" aria-label="选择标注浏览模式">
+        <button class="is-active" id="protoWebMenuModeFloat" type="button" aria-current="true">浮动标注</button>
+        <button id="protoWebOpenReview" type="button">三栏审阅</button>
+      </div>
+    </div>
+    <div class="protoWeb-menu-row">
+      <span class="protoWeb-menu-copy"><strong>显示标注</strong><small id="protoWebMenuCount">当前页面 0 条</small></span>
+      <button class="protoWeb-toggle" id="protoWebPageToggle" type="button" role="switch" aria-checked="false" aria-label="显示页面标注"></button>
+    </div>
+    <button class="protoWeb-menu-link" id="protoWebOpenDocs" type="button" role="menuitem">
+      <span class="protoWeb-menu-copy"><strong>原型说明</strong><small>查看跨页面需求与整体说明</small></span>
+      <span class="protoWeb-menu-arrow" aria-hidden="true">›</span>
+    </button>
+  </div>
+  <div class="protoWeb-docs-backdrop" id="protoWebDocsBackdrop">
+    <section class="protoWeb-docs" id="protoWebDocs" role="dialog" aria-modal="true" aria-labelledby="protoWebDocsTitle">
+      <header class="protoWeb-docs-header">
+        <span class="protoWeb-docs-title" id="protoWebDocsTitle">原型说明</span>
+        <span class="protoWeb-docs-meta" id="protoWebDocsMeta"></span>
+        <button class="protoWeb-icon-button" id="protoWebDocsClose" type="button" title="关闭原型说明" aria-label="关闭原型说明">×</button>
+      </header>
+      <div class="protoWeb-docs-main">
+        <nav class="protoWeb-docs-nav" id="protoWebDocsNav" aria-label="原型说明目录"></nav>
+        <div class="protoWeb-docs-body" id="protoWebDocsBody">
+          <article class="protoWeb-content protoWeb-docs-content" id="protoWebDocsContent"></article>
+        </div>
+      </div>
+    </section>
+  </div>
+  <button class="protoWeb-launcher" id="protoWebLauncher" type="button" aria-haspopup="menu" aria-expanded="false" title="打开原型标注菜单">
+    <span class="protoWeb-launcher-symbol">注</span>
+    <span class="protoWeb-launcher-count" id="protoWebLauncherCount">0</span>
+  </button>
+</div>

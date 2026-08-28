@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web 标注回归夹具</title>
+  <style>
+    html, body { height: 100%; }
+    body { margin: 0; overflow: hidden; font-family: "Microsoft YaHei", sans-serif; color: #223355; }
+    [data-proto-app] { width: 100%; height: 100%; overflow: hidden; }
+    nav { height: 56px; display: flex; gap: 8px; align-items: center; padding: 0 20px; background: #3388ff; }
+    nav button { padding: 8px 16px; }
+    .page { height: calc(100% - 56px); padding: 24px; overflow: auto; }
+    .region { min-height: 180px; margin-bottom: 16px; padding: 20px; border: 1px solid #dde1eb; }
+  </style>
+</head>
+<body>
+  <div id="fixtureApp" data-proto-app data-proto-platform="web">
+    <nav>
+      <button type="button" data-page="one">页面一</button>
+      <button type="button" data-page="two">页面二</button>
+      <button type="button" data-page="three">页面三</button>
+    </nav>
+    <section id="pageOne" class="page" data-proto-scope="page:one" data-proto-layer="0">
+      <div id="oneFilter" class="region">页面一筛选区</div><div id="oneTable" class="region">页面一表格</div>
+    </section>
+    <section id="pageTwo" class="page" data-proto-scope="page:two" data-proto-layer="0" hidden>
+      <div id="twoMetrics" class="region">页面二指标卡</div><div id="twoSwitch" class="region">页面二状态开关</div>
+    </section>
+    <section id="pageThree" class="page" data-proto-scope="page:three" data-proto-layer="0" hidden>
+      <div id="threeTree" class="region">页面三分类树</div><div id="threeAction" class="region">页面三批量操作</div>
+    </section>
+  </div>
+  <script id="prototypeAnnotationData" type="application/json">
+  {
+    "prototypeId": "web-annotation-fixture",
+    "version": 1,
+    "review": { "designWidth": 1920, "designHeight": 1080 },
+    "globalMeta": { "name": "回归夹具", "version": "V0.1", "updatedAt": "2026-07-23" },
+    "globalSections": [
+      { "id": "overview", "title": "原型概览", "format": "markdown", "content": "# 原型概览\n\n用于验证 Web 浮动标注与三栏审阅模式。" }
+    ],
+    "annotations": [
+      { "id": "one-filter", "scope": "page:one", "target": "#oneFilter", "x": 0.08, "y": 0.22, "title": "页面一筛选条件控制查询口径", "format": "markdown", "content": "条件确认后刷新本页数据。" },
+      { "id": "one-table", "scope": "page:one", "target": "#oneTable", "x": 0.92, "y": 0.76, "title": "页面一表格呈现商品对象", "format": "markdown", "content": "展示查询结果和可用操作。" },
+      { "id": "two-metrics", "scope": "page:two", "target": "#twoMetrics", "x": 0.15, "y": 0.68, "title": "页面二指标反映运行状态", "format": "markdown", "content": "指标口径来源于当前统计周期。" },
+      { "id": "two-switch", "scope": "page:two", "target": "#twoSwitch", "x": 0.84, "y": 0.3, "title": "页面二开关影响后续任务", "format": "markdown", "content": "关闭前需要确认影响范围。" },
+      { "id": "three-tree", "scope": "page:three", "target": "#threeTree", "x": 0.24, "y": 0.18, "title": "页面三分类树决定管理范围", "format": "markdown", "content": "选中节点后联动右侧内容。" },
+      { "id": "three-action", "scope": "page:three", "target": "#threeAction", "x": 0.76, "y": 0.82, "title": "页面三批量操作需要二次确认", "format": "markdown", "content": "不可逆操作必须展示影响数量。" }
+    ]
+  }
+  </script>
+  <script>
+    document.querySelectorAll("[data-page]").forEach(button => button.addEventListener("click", () => {
+      document.querySelectorAll("[data-proto-scope^='page:']").forEach(page => { page.hidden = page.id !== `page${button.dataset.page[0].toUpperCase()}${button.dataset.page.slice(1)}`; });
+      document.dispatchEvent(new Event("prototype-annotation:scopechange"));
+    }));
+  </script>
+</body>
+</html>

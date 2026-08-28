@@ -1,0 +1,167 @@
+{
+  "prototypeId": "local-delivery-mobile-skill-e2e",
+  "version": 1,
+  "mobile": {
+    "appRoot": "[data-proto-app]",
+    "deviceWidth": 414,
+    "scrollContainers": ["[data-proto-scroll-container]"]
+  },
+  "globalMeta": {
+    "name": "本地生活外卖应用原型",
+    "version": "V1.0 验收版",
+    "updatedAt": "2026-07-31"
+  },
+  "globalSections": [
+    {
+      "id": "overview",
+      "title": "原型范围",
+      "format": "markdown",
+      "content": "面向外卖消费者，覆盖地址定位、商家浏览、商品选购、购物车、提交订单、支付结果和配送跟踪。原型不接入真实支付与地图服务。"
+    },
+    {
+      "id": "flow",
+      "title": "核心流程",
+      "format": "markdown",
+      "content": "```mermaid\nflowchart LR\n  A[选择地址] --> B[浏览商家]\n  B --> C[选择商品]\n  C --> D[确认订单]\n  D --> E[支付结果]\n  E --> F[配送跟踪]\n```"
+    },
+    {
+      "id": "rules",
+      "title": "关键业务规则",
+      "format": "markdown",
+      "content": "1. 配送范围、起送价、配送费和预计送达时间均按当前地址计算。\n2. 商品规格、加料和数量共同决定购物车金额。\n3. 优惠券、满减和配送费按结算页最终规则重算。\n4. 支付成功后才生成有效订单；失败时保留结算信息并允许重试。\n5. 商家接单后展示配送节点，取消与退款入口按订单状态变化。"
+    },
+    {
+      "id": "acceptance",
+      "title": "验收重点",
+      "format": "markdown",
+      "content": "- PC 审阅模式三栏不重叠，手机画板保持 414px 设计宽度并等比显示。\n- 手机视口只显示业务原型和可拖动标注入口。\n- 页面、Bottom Sheet 和 Dialog 只显示当前最高层标注。\n- 地址、优惠、费用和预计送达时间在商家页与结算页保持一致。\n- 点击固定导航或底栏标注不滚动手机画板。"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "home-address-scope",
+      "scope": "page:home",
+      "target": "#deliveryAddress",
+      "x": 0.9,
+      "y": 0.5,
+      "title": "地址变化后重新计算可配送范围",
+      "format": "markdown",
+      "content": "切换地址后刷新商家可配送状态、配送费和预计送达时间。地址无法定位时保留文字地址，并提示用户补充门牌信息。",
+      "scroll": false
+    },
+    {
+      "id": "home-merchant-filter",
+      "scope": "page:home",
+      "target": "#merchantFilters",
+      "x": 0.08,
+      "y": 0.5,
+      "title": "品类、排序与优惠条件联合筛选",
+      "format": "markdown",
+      "content": "品类、配送速度、评分和优惠条件按交集生效。清空关键词不重置已确认的筛选项，返回首页时恢复最近一次有效条件。"
+    },
+    {
+      "id": "merchant-delivery-rule",
+      "scope": "page:merchant",
+      "target": "#merchantSummary",
+      "x": 0.94,
+      "y": 0.2,
+      "title": "商家信息使用当前地址的配送口径",
+      "format": "markdown",
+      "content": "起送价、配送费、距离和预计送达时间基于当前地址计算。超出配送范围时禁用结算入口，但仍允许浏览商品。"
+    },
+    {
+      "id": "product-spec-required",
+      "scope": "sheet:productSpec",
+      "target": "#productSpecSheet",
+      "x": 0.92,
+      "y": 0.18,
+      "title": "必选规格完成后才能加入购物车",
+      "format": "markdown",
+      "content": "规格组按单选或多选规则校验，必选项未完成时禁用确认。价格随规格、加料和数量实时更新。",
+      "scroll": false
+    },
+    {
+      "id": "cart-price-consistency",
+      "scope": "sheet:cart",
+      "target": "#cartItems",
+      "x": 0.08,
+      "y": 0.2,
+      "title": "购物车金额按商品快照实时汇总",
+      "format": "markdown",
+      "content": "小计由商品单价、规格加价和数量计算。商品售罄或价格变化时明确标出差异，并在用户确认前不直接替换原快照。"
+    },
+    {
+      "id": "cart-minimum-order",
+      "scope": "sheet:cart",
+      "target": "#checkoutButton",
+      "x": 0.88,
+      "y": 0.5,
+      "title": "达到起送价后开放结算",
+      "format": "markdown",
+      "content": "起送价只统计可参与计算的商品金额，不包含配送费。未达到起送价时显示差额；满足条件后进入确认订单页。",
+      "scroll": false
+    },
+    {
+      "id": "checkout-address-validation",
+      "scope": "page:checkout",
+      "target": "#checkoutAddress",
+      "x": 0.92,
+      "y": 0.5,
+      "title": "提交前再次校验地址可配送性",
+      "format": "markdown",
+      "content": "地址需包含联系人、手机号和门牌信息。商家配送范围变化或地址不可达时阻止提交，并保留购物车内容。"
+    },
+    {
+      "id": "checkout-promotion-order",
+      "scope": "page:checkout",
+      "target": "#priceBreakdown",
+      "x": 0.92,
+      "y": 0.2,
+      "title": "结算金额按优惠优先级重算",
+      "format": "markdown",
+      "content": "商品优惠、店铺满减、优惠券和配送费按配置顺序计算。用户更换优惠券后，同步更新应付金额和优惠明细。"
+    },
+    {
+      "id": "checkout-submit-lock",
+      "scope": "page:checkout",
+      "target": "#submitOrderButton",
+      "x": 0.12,
+      "y": 0.5,
+      "title": "提交订单期间防止重复创建",
+      "format": "markdown",
+      "content": "点击提交后锁定按钮并提交当前结算快照。创建失败时解除锁定、保留选择，并展示可重试原因。",
+      "scroll": false
+    },
+    {
+      "id": "payment-result-state",
+      "scope": "page:paymentResult",
+      "target": "#paymentResult",
+      "x": 0.92,
+      "y": 0.18,
+      "title": "支付结果以服务端订单状态为准",
+      "format": "markdown",
+      "content": "客户端超时不能直接判定失败，应查询订单状态。支付成功进入订单详情；未支付允许继续支付或按规则取消。"
+    },
+    {
+      "id": "delivery-timeline",
+      "scope": "page:orderTracking",
+      "target": "#deliveryTimeline",
+      "x": 0.92,
+      "y": 0.3,
+      "title": "配送节点按有效时间顺序展示",
+      "format": "markdown",
+      "content": "展示商家接单、备餐、取餐、配送和送达节点。节点更新保留历史时间，不用新状态覆盖已完成记录。"
+    },
+    {
+      "id": "cancel-order-confirm",
+      "scope": "dialog:cancelOrder",
+      "target": "#cancelOrderDialog",
+      "x": 0.9,
+      "y": 0.5,
+      "title": "取消入口随履约状态变化",
+      "format": "markdown",
+      "content": "未接单订单可直接申请取消；商家已接单后按退款规则处理。确认前展示预计退款金额和到账说明，提交中防止重复操作。",
+      "scroll": false
+    }
+  ]
+}

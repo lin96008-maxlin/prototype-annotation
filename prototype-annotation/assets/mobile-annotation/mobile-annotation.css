@@ -1,0 +1,458 @@
+:root {
+  --protoMobile-accent: #3388ff;
+  --protoMobile-accent-dark: #2167d9;
+  --protoMobile-accent-soft: #f0f9ff;
+  --protoMobile-ink: #223355;
+  --protoMobile-muted: #6b7a99;
+  --protoMobile-line: #dde1eb;
+  --protoMobile-bg: #edf0f6;
+  --protoMobile-device-width: 414px;
+  --protoMobile-docs-width: 520px;
+}
+
+html.protoMobile-ready,
+html.protoMobile-ready body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.protoMobile-stage,
+.protoMobile-stage *,
+.protoMobile-overlay-root,
+.protoMobile-overlay-root * {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+.protoMobile-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: var(--protoMobile-docs-width) 8px var(--protoMobile-device-width) minmax(320px, 1fr);
+  gap: 16px;
+  align-items: center;
+  overflow: hidden;
+  background: var(--protoMobile-bg);
+  color: var(--protoMobile-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+}
+
+.protoMobile-stage.no-docs {
+  grid-template-columns: var(--protoMobile-device-width) minmax(320px, 1fr);
+  justify-content: center;
+}
+.protoMobile-stage.no-docs .protoMobile-desktop-splitter { display: none; }
+.protoMobile-stage.no-docs .protoMobile-device { grid-column: 1; }
+.protoMobile-stage.no-docs .protoMobile-notes-panel { grid-column: 2; }
+
+.protoMobile-docs-panel { grid-column: 1; grid-row: 1; }
+.protoMobile-desktop-splitter { grid-column: 2; grid-row: 1; }
+.protoMobile-device { grid-column: 3; grid-row: 1; }
+.protoMobile-notes-panel { grid-column: 4; grid-row: 1; }
+
+.protoMobile-desktop-splitter {
+  position: relative;
+  width: 8px;
+  min-width: 8px;
+  height: min(896px, calc(100dvh - 32px));
+  align-self: center;
+  cursor: col-resize;
+  touch-action: none;
+  outline: none;
+}
+
+.protoMobile-desktop-splitter::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 56px;
+  border-radius: 2px;
+  background: #b8c2d3;
+  transform: translate(-50%, -50%);
+  transition: height 0.15s ease, background 0.15s ease;
+}
+
+.protoMobile-desktop-splitter:hover::after,
+.protoMobile-desktop-splitter:focus-visible::after,
+.protoMobile-desktop-splitter.is-dragging::after { height: 84px; background: var(--protoMobile-accent); }
+.protoMobile-stage.is-resizing { cursor: col-resize; user-select: none; }
+
+.protoMobile-device,
+.protoMobile-review-panel {
+  height: min(896px, calc(100dvh - 32px));
+  min-height: 0;
+}
+
+.protoMobile-device {
+  position: relative;
+  width: var(--protoMobile-device-width);
+  min-width: 0;
+  justify-self: center;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(34, 51, 85, 0.12);
+}
+
+.protoMobile-device > [data-proto-app] {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.protoMobile-review-panel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(51, 136, 255, 0.22);
+  border-top: 3px solid rgba(51, 136, 255, 0.82);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 44px rgba(34, 51, 85, 0.1);
+}
+
+.protoMobile-panel-header {
+  height: 56px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e9edf5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fff;
+  font-size: 16px;
+}
+
+.protoMobile-doc-layout {
+  height: calc(100% - 56px);
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  min-height: 0;
+}
+
+.protoMobile-doc-nav {
+  padding: 12px 8px;
+  border-right: 1px solid #e9edf5;
+  overflow-y: auto;
+  background: #fbfcff;
+}
+
+.protoMobile-doc-nav button {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--protoMobile-muted);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.protoMobile-doc-nav button:hover,
+.protoMobile-doc-nav button.is-active {
+  border-left-color: var(--protoMobile-accent);
+  color: #235cb3;
+  background: #e8f1ff;
+}
+
+.protoMobile-doc-content {
+  min-width: 0;
+  padding: 0 16px 24px;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+.protoMobile-doc-section {
+  padding: 20px 0;
+  border-bottom: 1px solid #e9edf5;
+  scroll-margin-top: 12px;
+}
+
+.protoMobile-doc-section:last-child { border-bottom: 0; }
+.protoMobile-doc-section > h3 { margin: 0 0 12px; color: var(--protoMobile-ink); font-size: 16px; line-height: 24px; }
+
+.protoMobile-desktop-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--protoMobile-muted);
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.protoMobile-switch {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #ced4e0;
+  cursor: pointer;
+}
+
+.protoMobile-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(34, 51, 85, 0.2);
+  transition: transform 180ms ease;
+}
+
+.protoMobile-switch[aria-checked="true"] { background: var(--protoMobile-accent); }
+.protoMobile-switch[aria-checked="true"]::after { transform: translateX(16px); }
+
+.protoMobile-note-list {
+  height: calc(100% - 56px);
+  padding: 12px;
+  overflow: auto;
+}
+
+.protoMobile-note-card {
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 12px 14px 12px 62px;
+  position: relative;
+  border: 1px solid #e1e6ef;
+  border-left: 4px solid #79a8ff;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(34, 51, 85, 0.06);
+  color: var(--protoMobile-ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.protoMobile-note-card:hover,
+.protoMobile-note-card.is-active {
+  border-color: #9bbcff;
+  border-left-color: var(--protoMobile-accent-dark);
+  box-shadow: 0 8px 20px rgba(33, 103, 217, 0.13);
+}
+
+.protoMobile-note-index {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--protoMobile-accent);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(33, 103, 217, 0.42), 0 5px 12px rgba(33, 103, 217, 0.2);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.protoMobile-note-card h3 { margin: 0 0 4px; font-size: 14px; line-height: 21px; }
+.protoMobile-note-card .protoMobile-rich-content { font-size: 12px; line-height: 19px; }
+.protoMobile-empty { padding: 40px 16px; color: #8b96ab; font-size: 13px; text-align: center; }
+
+.protoMobile-overlay-root {
+  --protoMobile-layer-root: 2147483000;
+  position: fixed;
+  inset: 0;
+  z-index: var(--protoMobile-layer-root);
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.protoMobile-overlay-root::backdrop { background: transparent; pointer-events: none; }
+.protoMobile-marker-layer { position: fixed; inset: 0; pointer-events: none; }
+.protoMobile-marker-layer.is-hidden { visibility: hidden; }
+.protoMobile-marker[hidden] { display: none; }
+
+.protoMobile-marker {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--protoMobile-accent);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(51, 136, 255, 0.28), 0 8px 18px rgba(33, 103, 217, 0.28);
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.protoMobile-marker:hover,
+.protoMobile-marker.is-active {
+  background: var(--protoMobile-accent-dark);
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(51, 136, 255, 0.28), 0 10px 22px rgba(33, 103, 217, 0.34);
+}
+
+.protoMobile-target-highlight {
+  outline: 3px solid rgba(51, 136, 255, 0.45) !important;
+  outline-offset: 3px !important;
+}
+
+.protoMobile-compact-docs-trigger,
+.protoMobile-compact-backdrop,
+.protoMobile-compact-close,
+.protoMobile-mobile-controls,
+.protoMobile-mobile-note-layer,
+.protoMobile-mobile-docs-layer { display: none; }
+
+.protoMobile-rich-content { color: var(--protoMobile-muted); font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
+.protoMobile-rich-content > :first-child { margin-top: 0; }
+.protoMobile-rich-content > :last-child { margin-bottom: 0; }
+.protoMobile-rich-content h1,
+.protoMobile-rich-content h2,
+.protoMobile-rich-content h3,
+.protoMobile-rich-content h4 { color: var(--protoMobile-ink); }
+.protoMobile-rich-content p,
+.protoMobile-rich-content ul,
+.protoMobile-rich-content ol,
+.protoMobile-rich-content blockquote,
+.protoMobile-rich-content pre,
+.protoMobile-rich-content table { margin: 8px 0; }
+.protoMobile-rich-content ul,
+.protoMobile-rich-content ol { padding-left: 20px; }
+.protoMobile-rich-content blockquote { padding: 8px 12px; border-left: 3px solid var(--protoMobile-accent); background: #f6f9ff; }
+.protoMobile-rich-content table { width: 100%; border-collapse: collapse; color: var(--protoMobile-ink); font-size: 12px; }
+.protoMobile-rich-content th,
+.protoMobile-rich-content td { padding: 7px 8px; border: 1px solid var(--protoMobile-line); text-align: left; vertical-align: top; }
+.protoMobile-rich-content th { background: #f5f7fa; }
+.protoMobile-rich-content pre { padding: 12px; border-radius: 4px; overflow: auto; background: #172033; color: #eaf1ff; }
+.protoMobile-rich-content code { font-family: Consolas, "SFMono-Regular", monospace; }
+.protoMobile-rich-content :not(pre) > code { padding: 2px 5px; border-radius: 3px; background: #edf3ff; color: #235cb3; }
+.protoMobile-rich-content img { display: block; max-width: 100%; height: auto; margin: 10px auto; border-radius: 4px; }
+.protoMobile-rich-content .protoMobile-mermaid { max-width: 100%; overflow: auto; }
+.protoMobile-rich-content .protoMobile-mermaid svg { max-width: 100%; height: auto; }
+
+@media (min-width: 768px) and (max-width: 1179px) {
+  .protoMobile-stage { grid-template-columns: var(--protoMobile-device-width) minmax(320px, 1fr); justify-content: center; }
+  .protoMobile-docs-panel { display: none; }
+  .protoMobile-desktop-splitter { display: none; }
+  .protoMobile-device { grid-column: 1; }
+  .protoMobile-notes-panel { grid-column: 2; }
+  .protoMobile-docs-panel.is-compact-open {
+    position: fixed;
+    inset: 16px auto 16px 16px;
+    z-index: 2147483500;
+    width: min(520px, calc(100vw - 32px));
+    height: auto;
+    display: block;
+    pointer-events: auto;
+  }
+  .protoMobile-compact-close { display: grid; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; place-items: center; background: #f5f7fa; color: var(--protoMobile-ink); font-size: 20px; cursor: pointer; }
+  .protoMobile-compact-docs-trigger { position: fixed; top: 18px; left: 18px; z-index: 2147483400; display: block; min-width: 54px; height: 34px; border: 1px solid #9bbcff; border-radius: 17px; background: #fff; color: #235cb3; pointer-events: auto; cursor: pointer; }
+  .protoMobile-compact-backdrop.is-open { position: fixed; inset: 0; z-index: 2147483450; display: block; background: rgba(20, 32, 55, 0.38); pointer-events: auto; }
+}
+
+@media (max-width: 767px) {
+  .protoMobile-stage { display: block; padding: 0; background: #fff; }
+  .protoMobile-review-panel { display: none; }
+  .protoMobile-desktop-splitter { display: none; }
+  .protoMobile-device { width: 100%; height: 100dvh; max-height: none; box-shadow: none; }
+  .protoMobile-mobile-controls { display: block; }
+  .protoMobile-mobile-launcher {
+    position: fixed;
+    right: 16px;
+    bottom: calc(112px + env(safe-area-inset-bottom));
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--protoMobile-accent), var(--protoMobile-accent-dark));
+    color: #fff;
+    box-shadow: 0 0 0 2px rgba(33, 103, 217, 0.48), 0 10px 24px rgba(33, 103, 217, 0.36);
+    pointer-events: auto;
+    touch-action: none;
+    cursor: grab;
+  }
+  .protoMobile-mobile-launcher > span { font-size: 18px; font-weight: 700; }
+  .protoMobile-mobile-launcher > small { position: absolute; top: -6px; right: -5px; min-width: 20px; height: 20px; padding: 0 4px; border: 2px solid #fff; border-radius: 10px; display: grid; place-items: center; background: #4d79d8; color: #fff; font-size: 10px; }
+  .protoMobile-mobile-menu {
+    position: fixed;
+    width: min(276px, calc(100vw - 16px));
+    padding: 6px;
+    border: 1px solid rgba(51, 136, 255, 0.28);
+    border-radius: 8px;
+    display: none;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(33, 103, 217, 0.22), 0 4px 12px rgba(8, 17, 38, 0.12);
+    pointer-events: auto;
+  }
+  .protoMobile-mobile-menu.is-open { display: block; }
+  .protoMobile-mobile-menu-row,
+  .protoMobile-mobile-menu-link { width: 100%; min-height: 58px; padding: 10px 12px; border: 0; border-radius: 5px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; color: var(--protoMobile-ink); font: inherit; text-align: left; }
+  .protoMobile-mobile-menu-link { cursor: pointer; }
+  .protoMobile-mobile-menu-link:hover { background: #f5f8ff; }
+  .protoMobile-mobile-menu-copy { display: grid; gap: 3px; }
+  .protoMobile-mobile-menu-copy strong { font-size: 14px; }
+  .protoMobile-mobile-menu-copy small { color: var(--protoMobile-muted); font-size: 11px; }
+  .protoMobile-mobile-note-layer.is-open { position: fixed; inset: 0; display: block; pointer-events: auto; }
+  .protoMobile-mobile-mask { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: rgba(24, 37, 62, 0.46); }
+  .protoMobile-mobile-sheet {
+    --protoMobile-sheet-height: 68dvh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--protoMobile-sheet-height);
+    min-height: 36dvh;
+    max-height: 94dvh;
+    border-radius: 16px 16px 0 0;
+    display: grid;
+    grid-template-rows: 28px auto minmax(0, 1fr);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 -12px 36px rgba(34, 51, 85, 0.18);
+  }
+  .protoMobile-sheet-handle { display: grid; place-items: center; touch-action: none; cursor: ns-resize; }
+  .protoMobile-sheet-handle span { width: 40px; height: 4px; border-radius: 2px; background: #c7cedb; }
+  .protoMobile-mobile-sheet-header { min-height: 56px; padding: 0 16px; border-bottom: 1px solid #e9edf5; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .protoMobile-mobile-sheet-header > strong { min-width: 0; color: var(--protoMobile-ink); font-size: 15px; line-height: 22px; }
+  .protoMobile-mobile-sheet-tools { display: flex; gap: 8px; }
+  .protoMobile-mobile-sheet-tools button,
+  .protoMobile-mobile-docs-header button { width: 38px; height: 38px; min-height: 0; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; background: #f5f7fa; color: var(--protoMobile-muted); font-size: 20px; cursor: pointer; }
+  .protoMobile-mobile-sheet-body { padding: 16px; overflow: auto; }
+  .protoMobile-mobile-docs-layer.is-open { position: fixed; inset: 0; display: grid; grid-template-rows: 58px minmax(0, 1fr); background: #fff; pointer-events: auto; }
+  .protoMobile-mobile-docs-header { padding: 0 16px; border-bottom: 1px solid #e9edf5; display: flex; align-items: center; justify-content: space-between; color: var(--protoMobile-ink); }
+  .protoMobile-mobile-docs-content { padding: 0 16px 24px; overflow: auto; }
+  .protoMobile-mobile-docs-content .protoMobile-doc-section { padding: 18px 0; }
+}

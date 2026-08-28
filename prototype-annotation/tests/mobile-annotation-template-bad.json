@@ -1,0 +1,23 @@
+{
+  "prototypeId": "mobile-template-bad",
+  "version": 1,
+  "mobile": {
+    "appRoot": "[data-proto-app]",
+    "deviceWidth": 414,
+    "scrollContainers": ["[data-proto-scroll-container]"]
+  },
+  "globalMeta": {
+    "name": "移动端坏标注反例",
+    "version": "V0.1",
+    "updatedAt": "2026-07-27"
+  },
+  "globalSections": [],
+  "annotations": [
+    { "id": "bad-1", "scope": "page:order:base", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" },
+    { "id": "bad-2", "scope": "page:order:base", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" },
+    { "id": "bad-3", "scope": "page:order:process", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" },
+    { "id": "bad-4", "scope": "page:order:process", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" },
+    { "id": "bad-5", "scope": "page:order:remark", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" },
+    { "id": "bad-6", "scope": "page:order:remark", "target": ".mobile-page", "x": 0.5, "y": 0.5, "title": "通用说明", "content": "重复内容。" }
+  ]
+}

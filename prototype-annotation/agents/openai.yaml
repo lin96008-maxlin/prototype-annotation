@@ -1,0 +1,4 @@
+interface:
+  display_name: "原型标注"
+  short_description: "为 Web 或移动端单 HTML 原型生成、编辑并写回业务标注和原型说明"
+  default_prompt: "使用 $prototype-annotation，为我指定的单 HTML 原型添加或编辑业务标注和原型说明。"

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端固定外壳回归夹具</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf0f6; font-family: "Microsoft YaHei", sans-serif; }
+    .prototype-stage { width: 414px; margin: 0 auto; overflow: hidden; }
+    .phone-frame { width: 414px; max-width: 414px; height: 820px; overflow: hidden; border: 8px solid #172033; }
+    .mobile-app { width: 414px; height: 804px; display: flex; flex-direction: column; overflow: hidden; background: #fff; color: #223355; }
+    .navbar { height: 52px; flex: none; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #dde1eb; }
+    .summary { padding: 16px; border-bottom: 1px solid #dde1eb; }
+    .main-scroller { min-height: 0; flex: 1; overflow-y: auto; padding: 16px; }
+    .block { min-height: 360px; padding: 16px; border-bottom: 1px solid #dde1eb; }
+    .footer { height: 64px; flex: none; display: flex; align-items: center; justify-content: center; border-top: 1px solid #dde1eb; }
+  </style>
+</head>
+<body>
+  <div class="prototype-stage">
+    <div class="phone-frame">
+      <main class="mobile-app" data-proto-app data-proto-platform="mobile" data-proto-scope="page:order" data-proto-layer="0">
+        <header class="navbar" data-proto-scroll="none">订单详情</header>
+        <section id="orderSummary" class="summary">订单编号：20260727001</section>
+        <div class="main-scroller" data-proto-scroll-container>
+          <section id="businessRule" class="block">业务规则</section>
+          <section id="approvalResult" class="block">审批结果</section>
+        </div>
+        <footer class="footer" data-proto-scroll="none">提交审核</footer>
+      </main>
+    </div>
+  </div>
+  <script id="prototypeAnnotationData" type="application/json">
+  {
+    "prototypeId": "mobile-nested-frame-fixture",
+    "version": 1,
+    "mobile": {
+      "appRoot": "[data-proto-app]",
+      "deviceWidth": 414,
+      "scrollContainers": ["[data-proto-scroll-container]"]
+    },
+    "globalMeta": { "name": "固定外壳回归夹具", "version": "V0.1", "updatedAt": "2026-07-27" },
+    "globalSections": [
+      { "id": "overview", "title": "原型概览", "format": "markdown", "content": "验证固定宽度外壳不会压缩 PC 三栏审阅框架。" }
+    ],
+    "annotations": [
+      { "id": "order-rule", "scope": "page:order", "target": "#businessRule", "x": 0.92, "y": 0.25, "title": "业务规则决定处理范围", "format": "markdown", "content": "仅具备审核权限的角色可以修改规则。" },
+      { "id": "approval-state", "scope": "page:order", "target": "#approvalResult", "x": 0.92, "y": 0.75, "title": "审批结果影响后续状态", "format": "markdown", "content": "审核失败时必须填写原因并保留历史记录。" }
+    ]
+  }
+  </script>
+</body>
+</html>
