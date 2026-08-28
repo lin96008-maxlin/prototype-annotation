@@ -1,0 +1,56 @@
+name: 持续集成检查
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Skill 语法与回归
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 配置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 检查自研脚本语法
+        shell: bash
+        run: |
+          find prototype-annotation -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) \
+            ! -name 'marked.umd.js' ! -name 'mermaid.min.js' -print0 \
+            | xargs -0 -n1 node --check
+
+      - name: 运行 Skill 完整回归
+        run: node prototype-annotation/scripts/test-skill.mjs
+
+      - name: 检查第三方许可保留逻辑
+        shell: bash
+        run: |
+          grep -q 'licenseComment("Marked"' prototype-annotation/scripts/inject-web-annotations.mjs
+          grep -q 'licenseComment("Mermaid"' prototype-annotation/scripts/inject-web-annotations.mjs
+          grep -q 'licenseComment("Marked"' prototype-annotation/scripts/inject-mobile-annotations.mjs
+          grep -q 'licenseComment("Mermaid"' prototype-annotation/scripts/inject-mobile-annotations.mjs
+          test -f prototype-annotation/assets/web-annotation/marked-LICENSE
+          test -f prototype-annotation/assets/web-annotation/mermaid-LICENSE
+
+      - name: 检查 README 展示资源
+        shell: bash
+        run: |
+          test -f README.md
+          test -f docs/images/01-prototype-docs.png
+          test -f docs/images/02-floating-annotations.png
+          test -f docs/images/03-three-column-review.png
+          test -f docs/images/04-edit-prototype-docs.png
+          test -f docs/images/05-locate-annotation-marker.png
+          test -f docs/images/06-edit-annotation.png
+

@@ -1,44 +1,98 @@
-# Prototype Annotation
+# 原型标注（Prototype Annotation）
 
-把业务说明、交互规则和评审意见直接写进单个 HTML 原型，让一份文件同时承担原型、PRD 补充说明和评审载体。
+[![持续集成检查](https://github.com/lin96008-maxlin/prototype-annotation/actions/workflows/ci.yml/badge.svg)](https://github.com/lin96008-maxlin/prototype-annotation/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-16a34a.svg)](./LICENSE)
+[![Codex Skill](https://img.shields.io/badge/Codex-Skill-4967ff.svg)](./prototype-annotation/SKILL.md)
+[![Single HTML](https://img.shields.io/badge/Output-Single_HTML-0f766e.svg)](#最终交付是什么)
 
-## 为什么使用
+让 HTML 原型自己解释业务，而不是让产品经理在原型、PRD、会议记录和聊天消息之间来回寻找答案。
 
-- **更清晰的原型逻辑**：标注绑定真实页面元素，补充界面本身看不出的字段含义、计算口径、权限、状态条件、校验、流程和异常处理。
-- **更适合交流与汇报**：支持浮动标注、三栏审阅和集中原型说明，业务、产品、设计和研发可围绕同一份 HTML 讨论。
-- **减少文档分散**：原型、跨页面规则、功能架构、角色权限、版本记录和验收建议可封装在同一个自包含 HTML 中。
-- **离线可交付**：最终 HTML 内嵌样式、运行时、Markdown 和 Mermaid 支持，不依赖 CDN、在线图片或外部字体。
-- **可视化编辑**：通过本机 localhost 工作台编辑原型说明、增删标注、定位圆点并写回原 HTML。
+传统评审中，界面展示“长什么样”，PRD 解释“为什么这样设计”，口头沟通再补充权限、状态、口径和异常流程。材料一多，版本很快失去对应关系：评审者不知道说明属于哪个页面，研发也难以确认某条规则对应哪个控件。
+
+Prototype Annotation 把这些信息重新绑定到原型本身。它为已有 Web 或移动端单 HTML 原型生成可定位的业务标注和跨页面原型说明，并提供浮动标注、三栏审阅及 localhost 可视化编辑。最终仍只交付一份可离线打开的 HTML。
+
+**核心定位：一份 HTML，同时承载可交互原型、PRD 关键规则和评审上下文。**
+
+![原型说明](./docs/images/01-prototype-docs.png)
+
+## 核心价值
+
+- **原型与规则保持对应**：标注直接绑定筛选区、字段、指标、状态、操作按钮或弹层，不再依赖文档中的模糊截图编号。
+- **减少零散交付物**：页面说明、功能架构、角色权限、业务规则、版本记录和验收建议可随原型封装在同一 HTML 中。
+- **让评审更聚焦**：浮动模式适合边操作边查看；三栏模式适合集中汇报、逐条核对和跨页面评审。
+- **让修改真正写回**：本地编辑器可以新增栏目、定位页面元素、拖动圆点、修改正文，并把结果安全写回原文件。
+- **同时覆盖 Web 与移动端**：同一套标注数据模型适配 Web 页面、移动端页面、Tab、抽屉、Bottom Sheet 和 Dialog。
+- **离线、可传递、无服务依赖**：最终 HTML 内嵌样式、运行时、Markdown 与 Mermaid，不依赖 CDN、网络图片或业务后端。
 
 ## 功能展示
 
-> 截图中的名称和数据仅用于展示交互效果，后续可直接替换 `docs/images/` 下的同名文件。
+> 以下截图使用演示数据，仅用于展示 Skill 的交互与呈现能力。
 
-### 1. 打开原型说明
+### 浮动标注：在原型上直接解释业务
 
-![打开原型说明](docs/images/01-prototype-docs.png)
+标注圆点跟随真实页面元素。点击圆点即可查看当前规则，并可在同一作用域内切换上一条、下一条；业务页面、抽屉和弹窗只显示当前最高层级的标注。
 
-### 2. 浮动标注模式
+![浮动标注模式](./docs/images/02-floating-annotations.png)
 
-![浮动标注模式](docs/images/02-floating-annotations.png)
+### 三栏审阅：把说明、原型和标注放在同一视野
 
-### 3. 三栏审阅模式
+左侧集中展示跨页面原型说明，中间保持固定比例业务画布，右侧显示当前页面或弹层的标注。两侧栏支持调宽和收起，适合评审会议与汇报演示。
 
-![三栏审阅模式](docs/images/03-three-column-review.png)
+![三栏审阅模式](./docs/images/03-three-column-review.png)
 
-### 4. 编辑原型说明
+### 编辑原型说明：维护跨页面 PRD 信息
 
-![编辑原型说明](docs/images/04-edit-prototype-docs.png)
+在 localhost 编辑工作台中新增、删除和调整说明栏目，使用富文本、列表、表格、代码块或 Mermaid 维护业务背景、功能架构、角色权限、跨模块规则和验收建议。
 
-### 5. 定位标注圆点
+![编辑原型说明](./docs/images/04-edit-prototype-docs.png)
 
-![定位标注圆点](docs/images/05-locate-annotation-marker.png)
+### 定位标注：从规则回到真实页面元素
 
-### 6. 编辑标注
+编辑器按页面、Tab 和弹层作用域组织全部标注。选择标注后自动切换到对应业务状态并定位目标，避免在长原型中手工寻找控件。
 
-![编辑标注](docs/images/06-edit-annotation.png)
+![定位标注圆点](./docs/images/05-locate-annotation-marker.png)
+
+### 编辑标注：补充界面看不出的规则
+
+每条标注可独立修改标题、正文、位置、目标和作用域，也可选择 AI 润色。保存后由 Skill 执行质量检查，再将本轮修改写回原 HTML。
+
+![编辑标注](./docs/images/06-edit-annotation.png)
+
+## 主要能力
+
+| 领域 | 能力 |
+| --- | --- |
+| 标注生成 | 根据 HTML、PRD、需求说明和对话材料，生成字段含义、计算口径、权限、状态、校验、流程及异常处理标注 |
+| 原型说明 | 按材料动态组织原型概览、功能架构、业务规则、角色权限、版本记录、风险和验收建议，不强制套固定目录 |
+| Web 审阅 | 浮动标注与三栏审阅两种同级模式；支持页面、系统页签、抽屉、弹窗及最高作用域切换 |
+| 移动端审阅 | PC 三栏与手机视口自动切换；支持页面 Tab、Bottom Sheet、Dialog 和业务正文滚动定位 |
+| 可视化编辑 | localhost 三栏工作台；支持栏目编辑、标注增删改、圆点拖动、跨页面定位和单条 AI 润色 |
+| 安全写回 | 独立编辑会话、HTML 基线哈希、冲突阻止、失败回滚、增量验证计划 |
+| 内容质量 | 拦截低价值标注、通用容器滥用、重复坐标、重复正文、不稳定选择器和异常文本 |
+| 单文件交付 | 自动内嵌 CSS、运行时、Marked、Mermaid 和第三方许可告知，断网仍可查看 |
+
+## 工作方式
+
+```mermaid
+flowchart LR
+    H["已有单 HTML 原型"] --> S["Prototype Annotation Skill"]
+    R["PRD / 需求说明 / 已确认规则"] --> S
+    S --> O["自包含 HTML\n原型 + 标注 + 原型说明"]
+    O --> F["浮动标注"]
+    O --> C["三栏审阅"]
+    O --> E["localhost 编辑工作台"]
+    E -->|"校验并写回"| O
+```
+
+Skill 不重新设计业务 UI。它只在已有原型上补充必要的无视觉定位属性、结构化标注数据和审阅层，并在每次注入或写回后执行质量门禁。
 
 ## 安装
+
+### 环境要求
+
+- 已安装并可使用 Codex；
+- 已安装 Python 3，用于运行 Codex 内置 Skill 安装器；
+- 已安装 Node.js 18 或更高版本，用于标注注入、localhost 编辑和写回。
 
 ### 方式一：使用 Codex 内置安装器
 
@@ -58,7 +112,7 @@ python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github
   --path prototype-annotation
 ```
 
-安装器会将 Skill 安装到 `~/.codex/skills/prototype-annotation`。如果同名目录已经存在，安装器会停止，避免覆盖现有内容。安装后从下一轮 Codex 对话开始使用。
+安装器会将 Skill 安装到 `~/.codex/skills/prototype-annotation`。如果同名目录已经存在，安装器会停止，避免覆盖现有内容。安装成功后，从下一轮 Codex 对话开始使用。
 
 ### 方式二：手动安装
 
@@ -80,7 +134,9 @@ cp -R ./prototype-annotation/prototype-annotation ~/.codex/skills/prototype-anno
 
 ## 使用方式
 
-### 为现有 HTML 添加标注
+不需要记忆脚本命令。正常情况下只需在 Codex 对话中点名 `$prototype-annotation`，并提供目标 HTML 路径与已有需求材料。
+
+### 生成标注与原型说明
 
 在 Codex 中发送：
 
@@ -121,7 +177,22 @@ Codex 会启动 localhost 编辑服务并返回实际 `editUrl`。编辑工作�
 
 Skill 会读取当前 HTML 的活动编辑会话，刷新展示框架，执行质量检查并按变更范围决定是否需要浏览器复核。
 
-## 适用范围
+## 什么值得标注
+
+标注的价值不在数量，而在于解释界面本身无法表达的规则。
+
+| 应该标注 | 不应只做这种标注 |
+| --- | --- |
+| 指标统计口径、数据范围和更新时间 | “这里展示一个指标卡” |
+| 字段含义、默认值、必填条件和校验失败处理 | “这里可以输入内容” |
+| 不同角色的可见范围和操作权限 | “点击按钮进行操作” |
+| 状态流转、前后置条件和不可逆影响 | “支持查看详情” |
+| 批量操作的适用对象、部分失败与重试规则 | “支持批量处理” |
+| 空状态、加载失败、超时和异常恢复方式 | “页面支持刷新” |
+
+没有材料支持的规则必须标为“待确认”，不能根据行业常识补造。
+
+## 适用场景
 
 适合：
 
@@ -146,6 +217,19 @@ Skill 会读取当前 HTML 的活动编辑会话，刷新展示框架，执行�
 
 缺少这些属性时，Skill 只补充必要的无视觉定位契约，不改动业务视觉。
 
+## 最终交付是什么
+
+最终产物仍是一份普通 `.html` 文件，可以直接用浏览器打开、通过聊天工具传递，或上传到任意静态文件托管平台。它包含：
+
+- 原有业务原型及交互；
+- 结构化业务标注数据；
+- 跨页面原型说明；
+- Web 或移动端审阅界面；
+- Markdown 与 Mermaid 离线渲染能力；
+- 必要的第三方许可证告知。
+
+localhost 编辑器只在本机编辑时临时注入，不会作为编辑能力写入最终交付文件。
+
 ## 本地编辑数据
 
 编辑服务会在原型文件旁创建：
@@ -160,20 +244,18 @@ Skill 会读取当前 HTML 的活动编辑会话，刷新展示框架，执行�
 
 ## 目录结构
 
-```text
-prototype-annotation/
-├─ README.md
-├─ LICENSE
-├─ THIRD_PARTY_NOTICES.md
-├─ docs/images/
-└─ prototype-annotation/
-   ├─ SKILL.md
-   ├─ agents/
-   ├─ assets/
-   ├─ references/
-   ├─ scripts/
-   └─ tests/
-```
+| 路径 | 用途 |
+| --- | --- |
+| `prototype-annotation/SKILL.md` | Skill 入口、任务路由、职责边界和验证分级 |
+| `prototype-annotation/agents/` | Codex 界面名称、描述和默认调用提示 |
+| `prototype-annotation/references/` | Web、移动端和编辑写回的详细规则 |
+| `prototype-annotation/assets/` | 两端展示运行时、共享编辑器、Marked 与 Mermaid |
+| `prototype-annotation/scripts/` | 注入、写回、质量审计和回归脚本 |
+| `prototype-annotation/tests/` | Web/Mobile 正例、反例和回归夹具 |
+| `docs/images/` | README 功能截图，可用同名文件直接替换 |
+| `.github/` | 持续集成、贡献指南和安全说明 |
+| `LICENSE` | 本项目自研部分的 MIT License |
+| `THIRD_PARTY_NOTICES.md` | 第三方组件与许可证边界 |
 
 ## 技术说明
 
@@ -182,7 +264,34 @@ prototype-annotation/
 - 最终 HTML 会保留必要的第三方许可证告知。
 - `tests/` 用于 Skill 自身回归，不会进入用户的原型数据。
 
-## 许可证
+## 质量检查
+
+无需安装业务依赖即可运行 72 项 Skill 回归：
+
+```bash
+node prototype-annotation/scripts/test-skill.mjs
+```
+
+72 项回归覆盖 Web/Mobile 注入、重复注入幂等、旧框架受控迁移、编辑写回、作用域契约、低价值标注拦截和外部资源拦截。GitHub Actions 会在每次推送和 Pull Request 时运行脚本语法检查、完整回归，并额外检查两端第三方许可保留逻辑。
+
+浏览器级编辑器回归需要本地已安装 Playwright：
+
+```bash
+node prototype-annotation/scripts/qa-editor-platform.cjs
+```
+
+## 安全与隐私
+
+- 不要把真实客户名称、内部系统地址、账号、密钥、Token 或未脱敏业务数据提交到公共仓库。
+- `.prototype-review/` 可能保存尚未写回的业务说明和编辑会话，已被 `.gitignore` 排除，但仍需按项目要求管理。
+- localhost 编辑链接包含随机会话 Token，只应在本机使用，不要转发或映射到公网。
+- 最终 HTML 会包含原型与说明的完整内容，外发前应按接收对象检查数据边界。
+- 安全问题请通过 [GitHub Private Vulnerability Reporting](https://github.com/lin96008-maxlin/prototype-annotation/security/advisories/new) 私下反馈，详细说明见 [SECURITY.md](./.github/SECURITY.md)。
+
+## 参与贡献
+
+欢迎产品经理、设计师和开发者提交使用场景、兼容性问题、内容质量规则和交互改进。提交代码前请阅读 [贡献指南](./.github/CONTRIBUTING.md)，并确保没有包含真实业务数据或公司专属信息。
+
+## 开源许可
 
 本项目自研部分采用 [MIT License](LICENSE)。第三方组件的许可证与归属见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及 `prototype-annotation/assets/web-annotation/` 下的原始许可证文件。
-
