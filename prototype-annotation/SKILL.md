@@ -11,7 +11,7 @@ description: "为已有 Web 或移动端单 HTML 原型生成、注入、检查�
 
 - 负责：功能点标注、全局原型说明、Web/移动端标注展示、标注编辑、AI 润色、写回和质量验证。
 - 不负责：重新设计业务页面、切换设计体系、调整业务布局或重新生成整套原型。
-- 若没有可处理的 HTML，先向用户确认文件路径；需要新建业务原型时使用 `high-fidelity-prototype-ant-design`。
+- 若没有可处理的 HTML，说明本技能只处理已有单 HTML 原型，并请求用户提供目标文件；不要扩展为新建业务原型。
 - 修复定位时只允许增加稳定 `id`、`data-*`、scope 和 route 属性；确需改变业务交互时先说明原因。
 
 ## 资源导航
@@ -29,8 +29,9 @@ description: "为已有 Web 或移动端单 HTML 原型生成、注入、检查�
 - `scripts/prototype-annotation-review.mjs`：编辑服务、会话管理和写回工具。
 - `scripts/annotation-quality.mjs`：标注质量检查。
 - `scripts/audit-single-html.mjs`：单 HTML 审计。
+- `scripts/audit-self-contained.mjs`：发布与回归时检查外部 Skill 路由、旧名称和私有路径残留。
 
-只有新增或检查标注时读取对应平台指南；只有进入编辑模式或应用修改时读取编辑指南。标注任务不读取高保真原型技能的组件范式。
+只有新增或检查标注时读取对应平台指南；只有进入编辑模式或应用修改时读取编辑指南。运行时只按上述本目录资源导航渐进读取，不读取本目录外的组件范式或设计规范。
 
 ## 任务路由
 

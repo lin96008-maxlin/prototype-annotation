@@ -121,15 +121,17 @@ checks.push({
     && !skillSource.includes("优先修复本技能的通用框架")
 });
 checks.push({
-  label: "编辑服务不引用旧版合并 Skill",
+  label: "编辑服务只从当前 Skill 加载内部资源",
   passed: reviewServerSource.includes("const skillDirectory = path.dirname(scriptDirectory)")
-    && !reviewServerSource.includes("single-html-prototype")
+    && reviewServerSource.includes('path.join(skillDirectory, "assets", "annotation-editor")')
+    && reviewServerSource.includes('path.join(skillDirectory, "scripts", injectorName)')
 });
 checks.push({
   label: "日常流程不包含 Skill 回归命令",
   passed: !skillSource.includes("node scripts/test-skill.mjs")
     && !skillSource.includes("完整回归")
 });
+run("Skill 自包含审计", [path.join(scriptDir, "audit-self-contained.mjs"), skillDir]);
 checks.push({
   label: "首次注入默认只快速检查当前页面",
   passed: webGuideSource.includes("默认只打开当前页面")

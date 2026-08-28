@@ -383,7 +383,7 @@ function send(response, statusCode, body, contentType) {
 }
 
 function refreshAnnotationFramework(platform) {
-  if (!skillDirectory) throw new Error("找不到 通用设计系统 Skill 目录，无法刷新标注展示框架");
+  if (!skillDirectory) throw new Error("找不到当前原型标注 Skill 目录，无法刷新标注展示框架");
   const injectorName = platform === "mobile" ? "inject-mobile-annotations.mjs" : "inject-web-annotations.mjs";
   const injectorPath = path.join(skillDirectory, "scripts", injectorName);
   if (!fs.existsSync(injectorPath)) throw new Error(`找不到标注注入器：${injectorPath}`);
