@@ -5,6 +5,9 @@
 [![Codex Skill](https://img.shields.io/badge/Codex-Skill-4967ff.svg)](./prototype-annotation/SKILL.md)
 [![Single HTML](https://img.shields.io/badge/Output-Single_HTML-0f766e.svg)](#最终交付是什么)
 
+![Uploading image.png…]()
+
+
 让 HTML 原型自己解释业务，而不是让产品经理在原型、PRD、会议记录和聊天消息之间来回寻找答案。
 
 传统评审中，界面展示“长什么样”，PRD 解释“为什么这样设计”，口头沟通再补充权限、状态、口径和异常流程。材料一多，版本很快失去对应关系：评审者不知道说明属于哪个页面，研发也难以确认某条规则对应哪个控件。
