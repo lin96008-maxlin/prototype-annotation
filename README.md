@@ -1,4 +1,4 @@
-# 原型标注（Prototype Annotation）
+# 原型 HTML 标注（Prototype Annotation）
 
 [![持续集成检查](https://github.com/lin96008-maxlin/prototype-annotation/actions/workflows/ci.yml/badge.svg)](https://github.com/lin96008-maxlin/prototype-annotation/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-16a34a.svg)](./LICENSE)
