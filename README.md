@@ -5,6 +5,7 @@
 [![Codex Skill](https://img.shields.io/badge/Codex-Skill-4967ff.svg)](./prototype-annotation/SKILL.md)
 [![Single HTML](https://img.shields.io/badge/Output-Single_HTML-0f766e.svg)](#最终交付是什么)
 
+![产品经理猪有解｜开源 AI 工具与产品方法](./docs/images/brand-banner.png)
 
 让 HTML 原型自己解释业务，而不是让产品经理在原型、PRD、会议记录和聊天消息之间来回寻找答案。
 
